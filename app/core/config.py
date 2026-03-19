@@ -64,7 +64,7 @@ class Settings(BaseSettings):
         return f"redis://{self.REDIS_HOST}:{self.REDIS_PORT}/{self.REDIS_DB}"
  
  
-    ALLOWED_ORIGINS: List[str] = ["http://localhost:3000", "http://localhost:8000"]
+    ALLOWED_ORIGINS: List[str] = ["http://localhost:3000", "http://localhost:8000","https://hitchier-duane-ingenuously.ngrok-free.dev"]
     
     LOG_LEVEL: str = "INFO"
     LOG_FORMAT: str = "json"  # json | text
@@ -77,6 +77,18 @@ class Settings(BaseSettings):
     SMTP_PASSWORD: str = ""
     EMAILS_FROM_EMAIL: str = "noreply@example.com"
     EMAILS_FROM_NAME: str = "FastAPI App"
+    
+    
+    SECRET_KEY:str = ""
+    ALGORITHM: str = "HS256"
+    ACCESS_TOKEN_EXPIRE_MINUTES:int = 15
+    REFRESH_TOKEN_EXPIRE_DAYS:int = 7
+    EMAIL_VERIFICATION_TOKEN_EXPIRE_MINUTES: int = 1000
+    RESET_TOKEN_EXPIRE_MINUTES: int = 15
+    
+    ALBIO_API_BASE_URL:str='http://127.0.0.1:8000'
+    ALBIO_API_KEY:str='what'
+    
     
     
     

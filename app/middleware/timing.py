@@ -3,7 +3,7 @@ import time
 from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.requests import Request
 from starlette.responses  import Response
-
+from fastapi import HTTPException
 
 class TimingMiddleware(BaseHTTPMiddleware):
     
@@ -16,3 +16,9 @@ class TimingMiddleware(BaseHTTPMiddleware):
         duration = time.perf_counter() - start
         response.headers["X-Process-Time"] = f"{duration:.4f}s"
         return response
+    
+
+            
+        
+        
+        
