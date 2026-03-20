@@ -4,7 +4,10 @@ from app.schemas.llms import ProxyInvokeRequest
 from app.services.llm_services import LLMService,get_llm_service
 from app.services.login_services import LoginService
 from app.models.candidate import Candidate
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse,StreamingResponse
+import asyncio
+from pydantic import BaseModel
+
 
 router = APIRouter()
 
@@ -31,3 +34,5 @@ async def invoke_albai(
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,detail=str(e))
     
+
+

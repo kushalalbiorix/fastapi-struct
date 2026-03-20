@@ -132,4 +132,13 @@ class LoginService:
         return await LoginService.create_login_tokens(email=email)
         
         
+    @staticmethod
+    async def verify_token(verify_token: str):
+        
+        payload = await LoginService._decode_token(verify_token)
+        return payload.get("sub",None)
+    
+    
+        
+        
     

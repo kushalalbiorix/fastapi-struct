@@ -11,6 +11,7 @@ from sqlalchemy import select
 from app.models.candidate import Candidate
 import bcrypt
 
+
 class DataService:
     
     def __init__(self, session: AsyncSession) -> None:
@@ -58,4 +59,50 @@ class DataService:
         return {"id":candidate.id, "email":candidate.email, "password":password}
     
     
+    
+    async def verify_candidate(self,email:str):
+        
+        candidate  = await self.candidate_by_email(email)
+        if not candidate:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="Invalide email")
+        
+        candidate.verified = True
+        # self.session.add(candidate)
+        await self.session.commit()
+        return candidate
+    
+    async def reset_password(self,email:str):
+        
+        candidate = await self.candidate_by_email(email)
+        if not candidate:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="Invalide email")
+        
+        generate_password =  self._generate_humun_readble_password()
+        
+        decoded = bcrypt.hashpw(generate_password.encode(),bcrypt.gensalt()).decode()
+        
+        candidate.password = decoded
+        # self.session.add(candidate)
+        await self.session.commit()
+        
+        return {
+            "email": candidate.email,
+            "password":generate_password
+        }
+        
+    
+    async def update_password(self,email:str,new_password:str,verify_password:str):
+        
+        candidate = await self.candidate_by_email(email)
+        if not candidate:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="Invalide email")
+        decoded = bcrypt.hashpw(new_password.encode(),bcrypt.gensalt()).decode()
+        
+        candidate.password = decoded
+        await self.session.commit()
+        return {
+            "email": candidate.email,
+            "password":new_password
+        }
+        
     

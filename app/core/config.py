@@ -87,7 +87,7 @@ class Settings(BaseSettings):
     RESET_TOKEN_EXPIRE_MINUTES: int = 15
     
     ALBIO_API_BASE_URL:str='http://127.0.0.1:8000'
-    ALBIO_API_KEY:str='what'
+    ALBIO_API_KEY:str='kgk34k0v-vkedpk349jfm340'
     
     
     

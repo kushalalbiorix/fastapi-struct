@@ -48,12 +48,12 @@ class LLMService:
                     error_detail = response.text
                     raise HTTPException(
                         status_code=response.status_code,
-                        detail=f"CyanAI service error: {error_detail}"
+                        detail=f"AlbioAI service error: {error_detail}"
                     )
         except httpx.TimeoutException:
-            raise HTTPException(status_code=408, detail="Request to CyanAI service timed out")
+            raise HTTPException(status_code=408, detail="Request to AlbioAI service timed out")
         except httpx.RequestError as e:
-            raise HTTPException(status_code=502, detail=f"Error connecting to CyanAI service: {str(e)}")
+            raise HTTPException(status_code=502, detail=f"Error connecting to AlbioAI service: {str(e)}")
         
         except Exception as e:
             raise HTTPException(status_code=500, detail=f"Internal server error: {str(e)}")
