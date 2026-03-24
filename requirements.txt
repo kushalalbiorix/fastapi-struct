@@ -1,0 +1,13 @@
+alembic
+fastapi
+uvicorn
+redis
+PyJWT
+pydantic-settings
+asyncpg
+passlib
+python-jose
+pydantic[email]
+httpx
+bcrypt
+psycopg2
